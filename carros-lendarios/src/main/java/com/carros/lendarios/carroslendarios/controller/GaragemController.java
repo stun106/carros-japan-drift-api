@@ -4,6 +4,7 @@ import com.carros.lendarios.carroslendarios.model.Carros;
 import com.carros.lendarios.carroslendarios.model.Garagem;
 import com.carros.lendarios.carroslendarios.service.imp.GaragemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/garagem")
-@RequiredArgsConstructor
 public class GaragemController {
-    private final GaragemService garagemService;
+
+    @Autowired
+    private  GaragemService garagemService;
 
     @PostMapping("/criar")
     public ResponseEntity<String> criarGaragem (@RequestBody Garagem garagem1) {
