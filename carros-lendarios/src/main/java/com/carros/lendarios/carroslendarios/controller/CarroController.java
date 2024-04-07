@@ -3,6 +3,7 @@ package com.carros.lendarios.carroslendarios.controller;
 import com.carros.lendarios.carroslendarios.model.Carros;
 import com.carros.lendarios.carroslendarios.service.imp.CarrosService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/carros")
 @RequiredArgsConstructor
 public class CarroController {
-    private final CarrosService carrosService;
-    @PostMapping("criar")
+
+    @Autowired
+    private CarrosService carrosService;
+
+    @PostMapping("/criar")
     public ResponseEntity<Carros> criarCarros(@RequestBody Carros carros){
         if (carros != null){
             carrosService.criarCarrro(carros);
