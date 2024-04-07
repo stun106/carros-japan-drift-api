@@ -17,8 +17,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/garagem")
 public class GaragemController {
 
-    @Autowired
-    private  GaragemService garagemService;
+    private static GaragemService garagemService;
 
     @PostMapping("/criar")
     public ResponseEntity<String> criarGaragem (@RequestBody Garagem garagem1) {
