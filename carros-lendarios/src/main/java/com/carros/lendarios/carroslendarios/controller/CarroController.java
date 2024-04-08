@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/carros")
-@RequiredArgsConstructor
 public class CarroController {
-
-    private static CarrosService carrosService;
+    @Autowired
+    private CarrosService carrosService;
 
     @PostMapping("/criar")
     public ResponseEntity<Carros> criarCarros(@RequestBody Carros carros){

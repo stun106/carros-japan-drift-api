@@ -19,12 +19,13 @@ public class GaragemService implements GaragemInterfaceImp {
     private final GaragemRepository garagemRepository;
     private final CarrosRepository carrosRepository;
     @Override //com.carros.lendarios.carroslendarios.service
-    public void criarGaragem ( Garagem garagem){
+    public Garagem criarGaragem (Garagem garagem){
         try {
             garagemRepository.save(garagem);
             }catch (RuntimeException e){
             throw new RuntimeException("Erro ao enviar dados para API.",e);
         }
+        return garagem;
     }
 
     @Override

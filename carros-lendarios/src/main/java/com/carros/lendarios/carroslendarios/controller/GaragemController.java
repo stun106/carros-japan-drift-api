@@ -1,5 +1,7 @@
 package com.carros.lendarios.carroslendarios.controller;
 
+import com.carros.lendarios.carroslendarios.dto.GaragemDto;
+import com.carros.lendarios.carroslendarios.dto.Mapper.GaragemMapper;
 import com.carros.lendarios.carroslendarios.model.Carros;
 import com.carros.lendarios.carroslendarios.model.Garagem;
 import com.carros.lendarios.carroslendarios.service.imp.GaragemService;
@@ -16,22 +18,18 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/garagem")
 public class GaragemController {
-
-    private static GaragemService garagemService;
+    @Autowired
+    private GaragemService garagemService;
 
     @PostMapping("/criar")
-    public ResponseEntity<String> criarGaragem (@RequestBody Garagem garagem1) {
-        if (garagem1 != null) {
-            garagemService.criarGaragem(garagem1);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Criado com sucesso");
-        }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao enviar dados para API.");
-        }
+    public ResponseEntity<GaragemDto> criarGaragem (@RequestBody GaragemDto garagemDto) {
+        Garagem garagem = garagemService.criarGaragem(GaragemMapper.toGaragem(garagemDto));
+            return ResponseEntity.status(HttpStatus.CREATED).body(GaragemMapper.toDto(garagem));
     }
     @GetMapping("/")
-    public ResponseEntity<List<Garagem>> buscarGaragens (){
+    public ResponseEntity<List<GaragemDto>> buscarGaragens (){
         List<Garagem> response = garagemService.buscarTodasGaragens();
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(GaragemMapper.toListGaragem(response));
     }
 
     @PatchMapping("/{id}/adicionar-carros")
